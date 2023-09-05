@@ -23,3 +23,5 @@ const createDockerfile = async (from, workdir, run, copy, run, cmd, expose) => {
 const services = {
     createDockerfile,
 }
+
+export default services;
