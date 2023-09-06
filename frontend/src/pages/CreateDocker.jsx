@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
+import Modal from "../components/Modal";
+import services from "../services/CreateDocker";
 
 const style = {
   input: `m-auto w-3/4 text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500`,
@@ -16,9 +18,21 @@ function CreateDocker() {
   const [run, setRun] = useState("");
   const [cmd, setCmd] = useState("");
   const [expose, setExpose] = useState("");
+  const [open, setOpen] = useState("");
 
-  const handleSumbit = () => {
+  const handleSumbit = (e) => {
+    // execute services created file
+    e.preventDefault();
+    services.createDockerfile(from, workdir, copy, run, cmd, expose);
+    setOpen(true);
+  }
 
+  const handleCancel = () => {
+    setOpen(false);
+  }
+  const downloadFile = () => {
+    services.downloadDockerfile();
+    setOpen(false);
   }
 
   return (
@@ -70,6 +84,9 @@ function CreateDocker() {
           </form>
         </div>
       </SideBar>
+      {open && (
+      <Modal message="Message" onClose={handleCancel} onConfirm={downloadFile} /> 
+      )} 
     </>
   );
 }
