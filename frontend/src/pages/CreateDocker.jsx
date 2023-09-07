@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
 import Modal from "../components/Modal";
-import services from "../services/CreateDocker";
+import services from "../services/createDocker";
 
 const style = {
   input: `m-auto w-3/4 text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500`,
