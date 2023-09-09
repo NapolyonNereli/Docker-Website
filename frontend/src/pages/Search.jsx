@@ -7,17 +7,17 @@ import services from "../services/searchImages";
 function Search() {
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
-  const [open, setOpen] = useState(false);
-  // const [download, setDownload] = useState(false);
 
   const submitSearch = async (e) => {
     e.preventDefault();
     try {
       const response = await services.searchImages(search);
-
-      const data = response.split("\n").map((line) => {
-        const [name, description, stars, official, automated] =
-          line.split(/\s{2,}/);
+  
+      const lines = response.split("\n");
+      lines.shift();
+      lines.pop();
+      const data = lines.map((line) => {
+        const [name, description, stars, official, automated] = line.split(/\s{2,}/);
         return {
           name,
           description,
@@ -31,6 +31,7 @@ function Search() {
       console.error("Hata oluştu: ", error);
     }
   };
+  
 
   return (
     <>
