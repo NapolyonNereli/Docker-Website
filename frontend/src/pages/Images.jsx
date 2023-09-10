@@ -15,8 +15,8 @@ function Images() {
       containerLines.pop();
       
       const imagesData = containerLines.map((line) => {
-        const [containerId, tag, imageID, created, time, ago, size] = line.split(/\s+/);
-        return { containerId, tag, imageID, created, time, ago, size };
+        const [name, tag, imageID, created, time, ago, size] = line.split(/\s+/);
+        return { name, tag, imageID, created, time, ago, size };
       })
 
       setImages(imagesData)
