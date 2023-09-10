@@ -1,12 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar';
 import SideBar from '../components/SideBar';
 import ImagesTable from '../components/ImagesTable';
 import services from '../services/images';
 function Images() {
+
+  const [images, setImages] = useState([]); 
+
   const fetchImages = () => {
     services.getImages().then((response) => {
-      console.log(response.data);
+      const containerLines = response.data.split("\n");
+
+      containerLines.shift();
+      containerLines.pop();
+      
+      const imagesData = containerLines.map((line) => {
+        const [containerId, tag, imageID, created, time, ago, size] = line.split(/\s+/);
+        return { containerId, tag, imageID, created, time, ago, size };
+      })
+
+      setImages(imagesData)
+
     }).catch((error) => {
       console.log(error);
     })
@@ -20,7 +34,7 @@ function Images() {
     <>
       <NavBar />
       <SideBar>
-        <ImagesTable />
+        <ImagesTable list={images} />
       </SideBar>
     </>
   )
