@@ -8,7 +8,7 @@ exports.superUser = async (pass) => {
         if(error) {
             console.log(error);
         }else {
-            console.log(stdout);
+            console.log("superUser: ", true);
             return stdout
         }
     })
