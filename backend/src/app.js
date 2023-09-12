@@ -6,6 +6,7 @@ const file = require("./routes/files");
 const root = require("./routes/superUser");
 const search = require("./routes/imageSearch");
 const images = require("./routes/images");
+const deploy = require("./routes/deploy");
 
 const app = express();
 const PORT = 3001;
@@ -19,6 +20,7 @@ app.use("/file", file);
 app.use("/root", root);
 app.use("/search", search);
 app.use("/images", images);
+app.use("/deploy", deploy);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
