@@ -25,7 +25,7 @@ function DeployPage() {
                 File Upload!
               </h2>
               <p className="mt-2 text-sm text-gray-400">
-                Lorem ipsum is placeholder text.
+                Upload your Dockerfile
               </p>
             </div>
             <form className="mt-8 space-y-3" action="#" method="POST">
