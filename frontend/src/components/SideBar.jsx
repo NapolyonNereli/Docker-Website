@@ -2,6 +2,7 @@ import React from "react";
 import { BsFillBoxFill, BsFillCloudFill } from "react-icons/bs";
 import { AiFillHome } from "react-icons/ai";
 import { RiFileSearchFill } from "react-icons/ri";
+import {FaOctopusDeploy} from "react-icons/fa"
 import {VscNewFile} from "react-icons/vsc"
 import { Link } from "react-router-dom";
 
@@ -98,6 +99,23 @@ function SideBar(props) {
                   <VscNewFile size={22} />
                 </svg>
                 <span className="flex-1 ml-3 whitespace-nowrap">Create Dockerfile</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/deploy-page"
+                className="w-full text-start flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <svg
+                  className="flex-shrink-0  w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <FaOctopusDeploy size={20} />
+                </svg>
+                <span className="flex-1 ml-3 whitespace-nowrap">Deploy</span>
               </Link>
             </li>
           </ul>
