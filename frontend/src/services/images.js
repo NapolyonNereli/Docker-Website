@@ -8,7 +8,6 @@ const api = axios.create({
 const getImages = async () => {
 try {
     const response = await api.get('/images/get-images');
-    console.log(response.data);
     return response
 } catch (error) {
     console.log(error);
