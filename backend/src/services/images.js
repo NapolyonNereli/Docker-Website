@@ -15,7 +15,7 @@ exports.getImages = async () => {
   });
 };
 
-// Click image button.
+// Run Images
 
 exports.createContainer = async (imageID) => {
   return new Promise((resolve, reject) => {
