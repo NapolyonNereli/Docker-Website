@@ -5,6 +5,10 @@ function ImagesTable({ list }) {
     console.log("button click", e);
   };
 
+  const deletedImage = (e) => {
+    console.log("deleted: ", e);
+  };
+
   return (
     <div className="rounded-lg relative overflow-x-auto">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -24,6 +28,9 @@ function ImagesTable({ list }) {
             </th>
             <th scope="col" className="px-6 py-3">
               ACTIONS
+            </th>
+            <th scope="col" className="px-6 py-3">
+              DELETE
             </th>
           </tr>
         </thead>
@@ -49,7 +56,15 @@ function ImagesTable({ list }) {
                   onClick={() => handleButton(image.imageID)}
                   className="px-4 rounded-md text-white py-2 bg-green-600 duration-500 hover:duration-500 hover:bg-green-700"
                 >
-                  Start
+                  Run
+                </button>
+              </td>
+              <td className="px-6 py-4">
+                <button
+                  onClick={() => deletedImage(image.imageID)}
+                  className="px-4 rounded-md text-white py-2 bg-red-600 hover:bg-red-700 hover:duration-500 duration-500"
+                >
+                  Deleted
                 </button>
               </td>
             </tr>
