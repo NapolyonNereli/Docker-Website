@@ -31,3 +31,19 @@ exports.createContainer = async (imageID) => {
     });
   });
 };
+
+exports.deleteImage = async (imageID) => {
+  return new Promise((resolve, reject) => {
+    const command = `sudo docker rmi ${imageID}`;
+
+    exec(command, (error, stdout) => {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else {
+        console.log(stdout);
+        resolve(stdout);
+      }
+    });
+  });
+};
