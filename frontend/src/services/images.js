@@ -13,9 +13,9 @@ const getImages = async () => {
   }
 };
 
-const deletedImage = async () => {
+const deletedImage = async (imageId) => {
   try {
-    const response = await api.post("/images/delete-image");
+    const response = await api.post("/images/delete-image", { imageId });
     console.log(response);
     return response;
   } catch (error) {
@@ -23,9 +23,9 @@ const deletedImage = async () => {
   }
 };
 
-const runImage = async () => {
+const runImage = async (imageID) => {
   try {
-    const response = await api.post("/images/run-image");
+    const response = await api.post("/images/run-container", { imageID });
     console.log(response);
     return response;
   } catch (error) {
