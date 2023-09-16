@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import services from "../services/images";
+import Modal from "./Modal";
 
 function ImagesTable({ list }) {
+  const [open, setOpen] = useState(false);
+  const [imageId, setImageId] = useState("");
+  const [image, setImage] = useState("");
+
   const handleButton = (e) => {
     console.log("button click", e);
   };
 
-  const deletedImage = (e) => {
-    console.log("deleted: ", e);
+  const deletedClick = async (imgName, imgId) => {
+    setImageId(imgId); // imageId'yi ayarla
+    setOpen(true);
+    setImage(imgName);
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleDelete = async () => {
+    const response = await services.deletedImage(imageId);
+    console.log(response);
+  };
+
+  console.log(imageId);
 
   return (
     <div className="rounded-lg relative overflow-x-auto">
@@ -61,7 +80,7 @@ function ImagesTable({ list }) {
               </td>
               <td className="px-6 py-4">
                 <button
-                  onClick={() => deletedImage(image.imageID)}
+                  onClick={() => deletedClick(image.name, image.imageID)}
                   className="px-4 rounded-md text-white py-2 bg-red-600 hover:bg-red-700 hover:duration-500 duration-500"
                 >
                   Deleted
@@ -71,6 +90,14 @@ function ImagesTable({ list }) {
           ))}
         </tbody>
       </table>
+      {open && (
+        <Modal
+          onClose={handleClose}
+          buttonText="Deleted"
+          message={`${image} emin misin silmeye`}
+          onConfirm={handleDelete}
+        />
+      )}
     </div>
   );
 }
