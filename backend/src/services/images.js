@@ -40,7 +40,7 @@ exports.deleteImage = async (imageID) => {
         console.log(error);
         reject(error);
       } else {
-        console.log(imageID); // imageID'yi console'da göster
+        console.log(imageID);
         resolve(stdout);
       }
     });
