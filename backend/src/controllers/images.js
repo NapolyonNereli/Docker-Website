@@ -10,16 +10,16 @@ exports.getImages = async (req, res) => {
   }
 };
 
-// exports.runContainer = async (req, res) => {
-//   const { imageID } = req.body;
-//   try {
-//     const images = await imageService.createContainer(imageID);
-//     res.send(images);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send("error: ", error);
-//   }
-// };
+exports.runImage = async (req, res) => {
+  const { imageID } = req.body;
+  try {
+    const images = await imageService.runImage(imageID);
+    res.send(images);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("error: ", error);
+  }
+};
 
 exports.deleteImage = async (req, res) => {
   const { imageID } = req.body;
