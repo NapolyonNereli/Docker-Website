@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
+import services from "../services/deploy";
 
 function DeployPage() {
+  // hooks
   const [selectedFile, setSelectedFile] = useState(null);
+  const [name, setName] = useState("");
+  const [text, setText] = useState("");
+
+  //functions
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await services.deployPath(text, name);
+    console.log(response);
+  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -28,12 +41,14 @@ function DeployPage() {
                 Upload your Dockerfile
               </p>
             </div>
-            <form className="mt-8 space-y-3" action="#" method="POST">
+            <form onSubmit={handleSubmit} className="mt-8 space-y-3">
               <div className="grid grid-cols-1 space-y-2">
                 <label className="text-sm font-bold text-gray-500 tracking-wide">
                   Title
                 </label>
                 <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                   type="text"
                   placeholder="Container name"
@@ -83,8 +98,15 @@ function DeployPage() {
               </p>
               <div>
                 <h1 className="text-center text-3xl">OR</h1>
-                <label className="text-sm font-bold text-gray-500 tracking-wide">Dockerfile Path</label>
-                <input className="w-full text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"  placeholder="EX: /home/pc/Dockerfile" />
+                <label className="text-sm font-bold text-gray-500 tracking-wide">
+                  Dockerfile Path
+                </label>
+                <input
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  className="w-full text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                  placeholder="EX: /home/pc/Dockerfile"
+                />
               </div>
               <div>
                 <button
