@@ -7,14 +7,15 @@ function ImagesTable({ list }) {
   const [imageId, setImageId] = useState("");
   const [image, setImage] = useState("");
 
-  const handleButton = (e) => {
-    console.log("button click", e);
-  };
-
   const deletedClick = async (imgName, imgId) => {
-    setImageId(imgId); // imageId'yi ayarla
+    setImageId(imgId);
     setOpen(true);
     setImage(imgName);
+  };
+
+  const runImage = async (imgId) => {
+    const response = await services.runImage(imgId);
+    console.log(response);
   };
 
   const handleClose = () => {
@@ -72,7 +73,7 @@ function ImagesTable({ list }) {
               <td className="px-6 py-4">{image.imageID}</td>
               <td className="px-6 py-4">
                 <button
-                  onClick={() => handleButton(image.imageID)}
+                  onClick={() => runImage(image.imageID)}
                   className="px-4 rounded-md text-white py-2 bg-green-600 duration-500 hover:duration-500 hover:bg-green-700"
                 >
                   Run
