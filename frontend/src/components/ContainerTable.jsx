@@ -46,6 +46,19 @@ function ContainerTable({ list }) {
               >
                 {containers.containerId}
               </th>
+              <td className="px-6 py-4">{containers.image}</td>
+              <td className="px-6 py-4">{containers.command}</td>
+              <td className="px-6 py-4">
+                {containers.created} {containers.time} {containers.ago}
+              </td>
+              <td className="px-6 py-4">{containers.status}</td>
+              <td className="px-6 py-4">{containers.port}</td>
+              <td className="px-6 py-4">{containers.names}</td>
+              <td className="px-6 py-4">
+                <button className="px-4 py-2 bg-red-400 text-white rounded-md">
+                  STOP
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
