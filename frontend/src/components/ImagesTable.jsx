@@ -3,23 +3,33 @@ import services from "../services/images";
 import Modal from "./Modal";
 
 function ImagesTable({ list }) {
-  const [open, setOpen] = useState(false);
   const [imageId, setImageId] = useState("");
   const [image, setImage] = useState("");
+  const [name, setName] = useState("");
+  const [port, setPort] = useState("4000:4000");
+  const [open, setOpen] = useState(false);
+  const [modal, setModal] = useState(false);
 
-  const deletedClick = async (imgName, imgId) => {
+  //functions
+  const deletedClick = (imgName, imgId) => {
     setImageId(imgId);
     setOpen(true);
     setImage(imgName);
   };
 
-  const runImage = async (imgId) => {
-    const response = await services.runImage(imgId);
+  const clickRun = (imgId) => {
+    setImageId(imgId);
+    setModal(true);
+  };
+
+  const runImage = async () => {
+    const response = await services.runImage(name, port, imageId);
     console.log(response);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setModal(false);
   };
 
   const handleDelete = async () => {
@@ -73,7 +83,7 @@ function ImagesTable({ list }) {
               <td className="px-6 py-4">{image.imageID}</td>
               <td className="px-6 py-4">
                 <button
-                  onClick={() => runImage(image.imageID)}
+                  onClick={() => clickRun(image.imageID)}
                   className="px-4 rounded-md text-white py-2 bg-green-600 duration-500 hover:duration-500 hover:bg-green-700"
                 >
                   Run
@@ -98,6 +108,50 @@ function ImagesTable({ list }) {
           message={`${image} emin misin silmeye`}
           onConfirm={handleDelete}
         />
+      )}
+      {modal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+          <div className="bg-white p-4 rounded-md shadow-md">
+            <div className="text-center mb-4">
+              <div className="grid grid-cols-1 space-y-2 mt-2">
+                <label className="m-auto grid grid-cols-1 space-y-2 text-black">
+                  Container Name
+                </label>
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="m-auto w-3/4 text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                  placeholder="container_name"
+                />
+              </div>
+              <div className="grid grid-cols-1 space-y-2 mt-2">
+                <label className="m-auto grid grid-cols-1 space-y-2 text-black">
+                  Port Number
+                </label>
+                <input
+                  value={port}
+                  onChange={(e) => setPort(e.target.value)}
+                  className="m-auto w-3/4 text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                  placeholder="4000:4000"
+                />
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <button
+                onClick={handleClose}
+                className="mr-2 px-4 py-2 bg-gray-400 rounded text-white hover:bg-gray-500"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={runImage}
+                className="px-4 py-2 bg-green-500 rounded text-white hover:bg-green-600"
+              >
+                RUN
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
