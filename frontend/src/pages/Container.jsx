@@ -17,9 +17,34 @@ function Container() {
         containerLines.pop();
 
         const containersData = containerLines.map((line) => {
-          const [containerId, image, command, created, status, port, names] =
-            line.split(/\s+/);
-          return { containerId, image, command, created, status, port, names };
+          const [
+            containerId,
+            image,
+            command,
+            created,
+            time,
+            ago,
+            status,
+            s, // leave a gap
+            d, // leave a gap
+            port,
+            f, // leave a gap
+            names,
+          ] = line.split(/\s+/);
+          return {
+            containerId,
+            image,
+            command,
+            created,
+            time,
+            ago,
+            status,
+            s,
+            d,
+            port,
+            f,
+            names,
+          };
         });
 
         setContainers(containersData);
