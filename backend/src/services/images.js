@@ -16,9 +16,9 @@ exports.getImages = async () => {
 
 // Run Images
 
-exports.runImage = async (imageID) => {
+exports.runImage = async (name, port, imageID) => {
   return new Promise((resolve, reject) => {
-    const command = `sudo docker run ${imageID}`;
+    const command = `sudo docker run --name ${imageID} -d -p ${name} ${port}`;
 
     exec(command, (error, stdout) => {
       if (error) {
