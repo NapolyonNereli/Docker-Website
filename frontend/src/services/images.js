@@ -25,10 +25,12 @@ const deletedImage = async (imageId) => {
   }
 };
 
-const runImage = async (imageID) => {
+const runImage = async (imageID, name, port) => {
   try {
     const response = await api.post("/images/run-image", {
       imageID,
+      name,
+      port,
     });
     console.log(response);
     return response;
