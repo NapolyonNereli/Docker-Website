@@ -11,9 +11,9 @@ exports.getImages = async (req, res) => {
 };
 
 exports.runImage = async (req, res) => {
-  const { imageID } = req.body;
+  const { name, port, imageID } = req.body;
   try {
-    const images = await imageService.runImage(imageID);
+    const images = await imageService.runImage(name, port, imageID);
     res.send(images);
   } catch (error) {
     console.log(error);
