@@ -13,3 +13,17 @@ exports.listContainers = async () => {
     });
   });
 };
+
+exports.stopContainer = async (imageId) => {
+  return new Promise((resolve, reject) => {
+    const command = `sudo docker stop ${imageId}`;
+
+    exec(command, (error, stdout) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(stdout);
+      }
+    });
+  });
+};
