@@ -1,8 +1,8 @@
 const { exec } = require("child_process");
 
-exports.buildImage = async (text, name, port) => {
+exports.buildImage = async (text, name) => {
   return new Promise((resolve, reject) => {
-    const command = `sudo docker run --name ${name} -d -p ${port} ${text}`;
+    const command = `sudo docker build -t ${name} ${text}`;
 
     exec(command, (error, stdout) => {
       if (error) {
