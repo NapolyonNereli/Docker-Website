@@ -1,23 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import services from "../services/superUser";
 
 function PanelNav() {
-  const [open, setOpen] = useState(false);
-  const [password, setPassword] = useState("");
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    services.superUser(password);
-  };
-
   return (
     <>
       <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -48,7 +32,7 @@ function PanelNav() {
               </button>
               <a href="/" className="flex ml-2 md:mr-24">
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                  Home
+                  Docker Web
                 </span>
               </a>
             </div>
@@ -61,47 +45,11 @@ function PanelNav() {
                     </button>
                   </Link>
                 </li>
-                <li className="mr-2">
-                  <button
-                    onClick={handleClick}
-                    className="py-2 px-4 text-sm hover:bg-green-600 hover:duration-500 duration-500 bg-green-500 text-white"
-                  >
-                    Root
-                  </button>
-                </li>
               </ul>
             </div>
           </div>
         </div>
       </nav>
-      {open && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-          <div className="bg-white p-4 rounded-md shadow-md">
-            <form onSubmit={handleSubmit}>
-              <p className="mb-4">
-                <input
-                  onChange={(e) => setPassword(e.target.value)}
-                  type="password"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-slate-200 dark:border-slate-200 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="sudo password"
-                  required
-                />
-              </p>
-              <div className="flex justify-between">
-                <button
-                  onClick={handleClose}
-                  className="mr-2 px-4 py-2 bg-gray-400 rounded text-white hover:bg-gray-500"
-                >
-                  Cancel
-                </button>
-                <button type="submit" className="px-4 py-2 bg-red-500 rounded text-white hover:bg-red-600">
-                  Confirm
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </>
   );
 }
