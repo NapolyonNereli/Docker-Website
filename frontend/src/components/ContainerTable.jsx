@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import services from "../services/containers";
+import Modal from "./Modal";
+import Anims from "./Anims";
+import loadingAnim from "../assets/anims/loading.json";
 
 function ContainerTable({ list }) {
+  const [open, setOpen] = useState(false);
+  const [containerId, setContainerId] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  //Stop container
+  const stopContainer = async () => {
+    setLoading(true);
+    setOpen(false);
+    if (!containerId) {
+      console.error("Container ID is undefined or empty.");
+      return;
+    }
+
+    try {
+      const response = await services.stopContainer(containerId);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error stopping container:", error);
+    }
+  };
+
+  const openPopup = (id) => {
+    setOpen(true);
+    setContainerId(id);
+  };
+
   return (
     <div className="rounded-lg relative overflow-x-auto">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -55,7 +85,10 @@ function ContainerTable({ list }) {
               <td className="px-6 py-4">{containers.port}</td>
               <td className="px-6 py-4">{containers.names}</td>
               <td className="px-6 py-4">
-                <button className="px-4 py-2 bg-red-400 text-white rounded-md">
+                <button
+                  onClick={() => openPopup(containers.containerId)}
+                  className="px-4 py-2 bg-red-400 text-white rounded-md"
+                >
                   STOP
                 </button>
               </td>
@@ -63,6 +96,8 @@ function ContainerTable({ list }) {
           ))}
         </tbody>
       </table>
+      {open && <Modal buttonText="deneme" onConfirm={stopContainer} />}
+      {loading && <Anims anim={loadingAnim} />}
     </div>
   );
 }
