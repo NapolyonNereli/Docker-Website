@@ -59,12 +59,12 @@ function DeployPage() {
                   Attach Document
                 </label>
                 <div className="flex items-center justify-center w-full">
-                  <input
+                  {/* <input
                     type="file"
                     className="hidden"
                     id="fileInput"
                     onChange={handleFileChange}
-                  />
+                  /> */}
                   <label
                     htmlFor="fileInput"
                     className="flex flex-col rounded-lg border-4 border-dashed w-full h-60 p-10 group text-center"
@@ -87,7 +87,8 @@ function DeployPage() {
                         />
                       </svg>
                       <p className="pointer-none text-gray-500">
-                        Drag your Dockerfile
+                        {/* Drag your Dockerfile */}
+                        Out of Use, Dont Use
                       </p>
                     </div>
                   </label>
