@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import services from "../services/images";
 import Modal from "./Modal";
 
@@ -23,8 +23,8 @@ function ImagesTable({ list }) {
   };
 
   const runImage = async () => {
-    const response = await services.runImage(name, port, imageId);
-    console.log(response);
+    await services.runImage(name, port, imageId);
+    setOpen(false);
   };
 
   const handleClose = () => {
@@ -36,8 +36,6 @@ function ImagesTable({ list }) {
     const response = await services.deletedImage(imageId);
     console.log(response);
   };
-
-  console.log(imageId);
 
   return (
     <div className="rounded-lg relative overflow-x-auto">
