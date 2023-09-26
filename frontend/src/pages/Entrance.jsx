@@ -1,6 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import services from "../services/superUser";
+import { useNavigate } from "react-router-dom";
 
 function Entrance() {
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await services.superUser(password);
+    console.log(response);
+    navigate("/home");
+  };
+
+  // Decoration balls
   useEffect(() => {
     function createRandomCircle(container) {
       const circle = document.createElement("div");
@@ -50,16 +63,26 @@ function Entrance() {
               <h3 className=" mt-5 text-5xl font-medium leading-tight text-red-400 ">
                 Authorization Access
               </h3>
-              <div className="mt-12">
+              <form onSubmit={handleSubmit} className="mt-12">
                 <label className="m-auto grid grid-cols-1 space-y-2 text-white">
-                  Sudo Password
+                  Password Entry
                 </label>
                 <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   placeholder="password"
                   className="text-black m-auto w-3/4 text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                 />
-              </div>
+                <div className="mt-5">
+                  <button
+                    type="submit"
+                    className="px-4 py-2 w-2/4 rounded-md bg-blue-400 hover:bg-blue-500"
+                  >
+                    Enter
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
