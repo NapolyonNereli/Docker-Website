@@ -12,12 +12,13 @@ function Search() {
     e.preventDefault();
     try {
       const response = await services.searchImages(search);
-  
+
       const lines = response.split("\n");
       lines.shift();
       lines.pop();
       const data = lines.map((line) => {
-        const [name, description, stars, official, automated] = line.split(/\s{2,}/);
+        const [name, description, stars, official, automated] =
+          line.split(/\s{2,}/);
         return {
           name,
           description,
@@ -31,7 +32,6 @@ function Search() {
       console.error("Hata oluştu: ", error);
     }
   };
-  
 
   return (
     <>
