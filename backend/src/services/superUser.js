@@ -1,7 +1,7 @@
 const { exec } = require("child_process");
 
 exports.superUser = async (pass) => {
-  const command = `echo ${pass} | sudo -S -v && sudo docker images`;
+  const command = `echo ${pass} | sudo -S -v && sudo docker --version`;
 
   exec(command, (error, stdout) => {
     if (error) {
