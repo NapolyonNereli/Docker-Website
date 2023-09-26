@@ -39,10 +39,10 @@ function Container() {
             time,
             ago,
             status,
-            s,
-            d,
+            s, // leave a gap
+            d, // leave a gap
             port,
-            f,
+            f, // leave a gap
             names,
           };
         });
