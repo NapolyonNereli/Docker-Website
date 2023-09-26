@@ -13,8 +13,21 @@ const getContainers = async () => {
   }
 };
 
+const stopContainer = async (imageId) => {
+  try {
+    const response = await api.post("/containers/stop-container", {
+      imageID: imageId,
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const services = {
   getContainers,
+  stopContainer,
 };
 
 export default services;
