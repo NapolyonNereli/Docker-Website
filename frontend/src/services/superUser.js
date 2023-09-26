@@ -7,14 +7,14 @@ const api = axios.create({
 const superUser = async (pass) => {
   try {
     const response = await api.post("/root/sudo", { pass });
-    console.log(response.data);
+    return response;
   } catch (error) {
     console.log(error);
   }
 };
 
 const services = {
-    superUser
-}
+  superUser,
+};
 
 export default services;
