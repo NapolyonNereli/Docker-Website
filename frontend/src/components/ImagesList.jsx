@@ -1,34 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
 import services from "../services/searchImages";
 import Anims from "./Anims";
-import deneme from '../assets/anims/loading.json';
-function ImagesList({ list }) {
+import loading from "../assets/anims/loading.json";
 
+function ImagesList({ list }) {
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState("");
   const [icon, setIcon] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
-  }
+  };
 
   const downloadImage = async () => {
-    setIcon(true)
-    setOpen(false)
+    setIcon(true);
+    setOpen(false);
+    setDownloading(true);
+
     const response = await services.downloadImages(image);
-    if(response) {
+
+    if (response) {
       setIcon(false);
+      setDownloading(false);
     }
-  }
+  };
 
   const handleClick = (name) => {
     setOpen(true);
     setImage(name);
-  }
+  };
+
+  useEffect(() => {
+    console.log("list prop güncellendi:", list);
+  }, [list]);
 
   return (
     <div className="w-full">
+      {downloading && (
+        <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-900 opacity-50 z-50"></div>
+      )}
+
       <div className="grid grid-cols-1">
         {list.map((item, index) => (
           <div
@@ -51,8 +64,21 @@ function ImagesList({ list }) {
           </div>
         ))}
       </div>
-      {icon && (<div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-20" ><Anims anim={deneme}/></div>)}
-      {open && (<Modal buttonText='Download' onClose={handleClose} message={`Are you sure download "${image}" image?`} onConfirm={downloadImage} />)}
+
+      {icon && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-20">
+          <Anims anim={loading} />
+        </div>
+      )}
+
+      {open && (
+        <Modal
+          buttonText="Download"
+          onClose={handleClose}
+          message={`Are you sure download "${image}" image?`}
+          onConfirm={downloadImage}
+        />
+      )}
     </div>
   );
 }
