@@ -61,7 +61,7 @@ function Container() {
   return (
     <>
       <NavBar />
-      <SideBar>
+      <SideBar selected="container">
         <ContainerTable list={containers} />
       </SideBar>
     </>
