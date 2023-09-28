@@ -3,14 +3,23 @@ import services from "../services/superUser";
 import { useNavigate } from "react-router-dom";
 
 function Entrance() {
+  // Enter Password
+  const [passwordError, setPasswordError] = useState(false);
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await services.superUser(password);
-    console.log(response);
-    navigate("/home");
+    console.log(response.data);
+    if(response.data === "password error") {
+      setPasswordError(true)
+      setTimeout(() => {
+        setPasswordError(false)
+      }, 6000);
+    }else {
+      navigate("/home")
+    }
   };
 
   // Decoration balls
@@ -65,7 +74,7 @@ function Entrance() {
               </h3>
               <form onSubmit={handleSubmit} className="mt-12">
                 <label className="m-auto grid grid-cols-1 space-y-2 text-white">
-                  Password Entry
+                  Sudo Password
                 </label>
                 <input
                   value={password}
@@ -74,6 +83,7 @@ function Entrance() {
                   placeholder="password"
                   className="text-black m-auto w-3/4 text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                 />
+                {passwordError && (<p className="text-black">Incorrect password, try again!</p>)}
                 <div className="mt-5">
                   <button
                     type="submit"
