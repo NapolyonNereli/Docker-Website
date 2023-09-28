@@ -7,5 +7,6 @@ exports.superUser = async (req, res) => {
     res.status(200).send(superUser);
   } catch (error) {
     console.log(error);
+    res.send("password error")
   }
 };
