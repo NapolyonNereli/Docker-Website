@@ -34,7 +34,7 @@ function Images() {
   return (
     <>
       <NavBar />
-      <SideBar>
+      <SideBar selected="images">
         <ImagesTable list={images} />
       </SideBar>
     </>
