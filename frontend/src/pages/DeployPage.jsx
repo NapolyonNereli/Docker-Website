@@ -29,7 +29,7 @@ function DeployPage() {
   return (
     <>
       <NavBar />
-      <SideBar>
+      <SideBar selected="deploy">
         <div className="min-h-screen flex justify-center py-12 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-cover relative items-center">
           <div className="absolute opacity-60 inset-0 z-0"></div>
           <div className="sm:max-w-lg w-full p-10 bg-slate-50 shadow-lg rounded-xl z-10">
