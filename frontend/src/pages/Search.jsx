@@ -37,7 +37,7 @@ function Search() {
     <>
       <NavBar />
       <SearchBar submit={submitSearch} search={search} setsearch={setSearch} />
-      <SideBar>
+      <SideBar selected="search">
         <ImagesList list={list} />
       </SideBar>
     </>
