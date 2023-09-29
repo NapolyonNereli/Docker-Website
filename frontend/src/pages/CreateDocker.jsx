@@ -85,7 +85,7 @@ function CreateDocker() {
         </div>
       </SideBar>
       {open && (
-      <Modal buttonText='Download' message="Message" onClose={handleCancel} onConfirm={downloadFile} /> 
+      <Modal buttonText='Download' message="Are you sure?" onClose={handleCancel} onConfirm={downloadFile} /> 
       )} 
     </>
   );
