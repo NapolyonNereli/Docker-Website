@@ -103,7 +103,7 @@ function ImagesTable({ list }) {
         <Modal
           onClose={handleClose}
           buttonText="Deleted"
-          message={`${image} emin misin silmeye`}
+          message={`Are you sure you want to remove this ${image}?`}
           onConfirm={handleDelete}
         />
       )}
