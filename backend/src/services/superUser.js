@@ -2,7 +2,7 @@ const { exec } = require("child_process");
 
 exports.superUser = async (pass) => {
   return new Promise((resolve, reject) => {
-    const command = `echo ${pass} | sudo -S sh`;
+    const command = `echo ${pass} | sudo -S ls`;
     exec(command, (error, stdout) => {
       if (error) {
         console.log(error);
