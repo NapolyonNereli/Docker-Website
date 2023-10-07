@@ -6,6 +6,7 @@ import Search from "./pages/Search";
 import CreateDocker from "./pages/CreateDocker";
 import DeployPage from "./pages/DeployPage";
 import Entrance from "./pages/Entrance";
+import Tutorial from "./pages/Tutorial";
 export default function App() {
   return (
     <>
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="search" element={<Search />} />
           <Route path="create-dockerfile" element={<CreateDocker />} />
           <Route path="deploy-page" element={<DeployPage />} />
+          <Route path="tutorial" element={<Tutorial />} />
         </Routes>
       </BrowserRouter>
     </>
